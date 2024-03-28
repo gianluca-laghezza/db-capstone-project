@@ -70,29 +70,55 @@ LOCK TABLES `customers` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `menu`
+-- Table structure for table `menuItems`
 --
 
-DROP TABLE IF EXISTS `menu`;
+DROP TABLE IF EXISTS `menuItems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menu` (
-  `menuItemID` int NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `cuisine` varchar(45) NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `cost` decimal(2,0) NOT NULL,
-  PRIMARY KEY (`menuItemID`)
+CREATE TABLE `menuItems` (
+  `menuItemsID` int NOT NULL,
+  `courseName` varchar(45) NOT NULL,
+  `starterName` varchar(45) DEFAULT NULL,
+  `dessertName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`menuItemsID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `menu`
+-- Dumping data for table `menuItems`
 --
 
-LOCK TABLES `menu` WRITE;
-/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+LOCK TABLES `menuItems` WRITE;
+/*!40000 ALTER TABLE `menuItems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menuItems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menus`
+--
+
+DROP TABLE IF EXISTS `menus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `menus` (
+  `menuID` int NOT NULL,
+  `menuItemsID` int NOT NULL,
+  `cuisine` varchar(45) NOT NULL,
+  `menuName` varchar(45) NOT NULL,
+  PRIMARY KEY (`menuID`),
+  KEY `menuItemsID_idx` (`menuItemsID`),
+  CONSTRAINT `menuItemsID` FOREIGN KEY (`menuItemsID`) REFERENCES `menuItems` (`menuItemsID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menus`
+--
+
+LOCK TABLES `menus` WRITE;
+/*!40000 ALTER TABLE `menus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -132,13 +158,13 @@ CREATE TABLE `orders` (
   `date` date NOT NULL,
   `quantity` int NOT NULL,
   `totalCost` decimal(2,0) NOT NULL,
-  `bookingID` int NOT NULL,
-  `menuItemID` int NOT NULL,
+  `customerID` int NOT NULL,
+  `menuID` int NOT NULL,
   PRIMARY KEY (`orderID`),
-  KEY `BookingID_idx` (`bookingID`),
-  KEY `MenuItemID_idx` (`menuItemID`),
-  CONSTRAINT `BookingID` FOREIGN KEY (`bookingID`) REFERENCES `bookings` (`bookingID`),
-  CONSTRAINT `MenuItemID` FOREIGN KEY (`menuItemID`) REFERENCES `menu` (`menuItemID`)
+  KEY `MenuItemID_idx` (`menuID`),
+  KEY `customerID_idx` (`customerID`),
+  CONSTRAINT `customerID_orders` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
+  CONSTRAINT `menuID` FOREIGN KEY (`menuID`) REFERENCES `menus` (`menuID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-27 16:15:07
+-- Dump completed on 2024-03-28 16:22:24
