@@ -42,6 +42,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (1,'2024-04-01',2,1,1),(2,'2024-03-30',1,1,1),(3,'2024-02-02',5,3,2);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,6 +67,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'John Doe',203451292),(2,'Travis Perkins',33255343),(3,'Sophia Loren',39238564);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,6 +93,7 @@ CREATE TABLE `menuItems` (
 
 LOCK TABLES `menuItems` WRITE;
 /*!40000 ALTER TABLE `menuItems` DISABLE KEYS */;
+INSERT INTO `menuItems` VALUES (1,'pasta','carpaccio','tiramisu'),(2,'pad thai','spring rolls','tea');
 /*!40000 ALTER TABLE `menuItems` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +121,7 @@ CREATE TABLE `menus` (
 
 LOCK TABLES `menus` WRITE;
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
+INSERT INTO `menus` VALUES (1,1,'italian','italian menu'),(2,2,'thai','thai menu');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,6 +147,7 @@ CREATE TABLE `orderStatus` (
 
 LOCK TABLES `orderStatus` WRITE;
 /*!40000 ALTER TABLE `orderStatus` DISABLE KEYS */;
+INSERT INTO `orderStatus` VALUES (1,'2024-02-02','ready'),(2,'2024-04-01','preparing');
 /*!40000 ALTER TABLE `orderStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +162,7 @@ CREATE TABLE `orders` (
   `orderID` int NOT NULL,
   `date` date NOT NULL,
   `quantity` int NOT NULL,
-  `totalCost` decimal(2,0) NOT NULL,
+  `totalCost` decimal(5,2) DEFAULT NULL,
   `customerID` int NOT NULL,
   `menuID` int NOT NULL,
   PRIMARY KEY (`orderID`),
@@ -174,6 +179,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,'2024-02-02',5,500.00,3,1),(2,'2024-04-01',2,200.00,1,2);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,6 +205,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
+INSERT INTO `staff` VALUES (1,'manager',60000,'Alex Scazz'),(2,'waiter',50000,'Joe Sticazzi'),(3,'chef',40000,'Francois Dupall');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-28 16:22:24
+-- Dump completed on 2024-04-02 17:58:29
