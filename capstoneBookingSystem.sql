@@ -13,16 +13,16 @@ DELIMITER ;
 
 CALL CheckBooking('2022-10-10',5)
 
+DROP PROCEDURE AddValidBooking;
 DELIMITER //
-CREATE PROCEDURE AddValidBookbookingsbookingIDing(bookingDate DATE, tableNum INT)
+CREATE PROCEDURE AddValidBooking(bookingDate DATE, tableNum INT)
 BEGIN
 START TRANSACTION;
-INSERT INTO bookings (date, tableNumber, customerID, staffID) VALUES (bookingDate, tableNum, 1, 1);
-
-IF EXISTS (SELECT * FROM bookings WHERE date=bookingDate AND tableNumber=tableNum) THEN
+IF EXISTS(SELECT 1 FROM bookings WHERE date=bookingDate AND tableNumber=tableNum) THEN
   ROLLBACK;
   SELECT concat( 'Table ', tableNum, ' is already  booked');
  ELSE
+  INSERT INTO bookings (date, tableNumber, customerID, staffID) VALUES (bookingDate, tableNum, 1, 1);
   COMMIT;
   SELECT concat( 'Table ', tableNum, ' has been booked');
 END IF;
@@ -31,6 +31,4 @@ END//
 DELIMITER ;
 
 
-CALL AddValidBooking('2023-10-10',5);
-
-/*DROP PROCEDURE AddValidBooking;*/
+CALL AddValidBooking('2024-10-10',5);
