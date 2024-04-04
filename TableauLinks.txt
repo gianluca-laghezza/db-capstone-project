@@ -1,0 +1,5 @@
+https://public.tableau.com/app/profile/gianluca.laghezza/viz/DBCapstoneCharts1/CustomerSales
+https://public.tableau.com/app/profile/gianluca.laghezza/viz/DBCapstoneCharts2/ProfitChart
+https://public.tableau.com/app/profile/gianluca.laghezza/viz/DBCapstoneCharts3/SalesBubbleChart
+https://public.tableau.com/app/profile/gianluca.laghezza/viz/DBCapstoneCharts4/CuisineSalesProfit
+https://public.tableau.com/app/profile/gianluca.laghezza/viz/DBCapstoneCharts5/CustomerSalesDashboard
